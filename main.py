@@ -20,12 +20,12 @@ class Win_Main(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def StartSniff(self):
         sudopasswd = 'hzh'
-        command = '--preserve-env PYTHONPATH=$(pwd) python3 src/packet_sniffer.py > a.txt'
+        command = '--preserve-env PYTHONPATH=$(pwd) python3 src/packet_sniffer.py >> a.txt'
         os.system('echo %s|sudo -S %s' %(sudopasswd,command))
         f = open('a.txt','r',encoding='utf-8')
         text = f.read()
         self.textBrowser.setText(text)
-           
+
 #    def StopSniff(self):
 
 

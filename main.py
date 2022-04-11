@@ -6,6 +6,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import QFileDialog,QMessageBox,QDockWidget,QListWidget,QTableWidget,QTableWidgetItem,QTextBrowser
 from PyQt5.QtGui import *
 from src.output import OutputToScreen
+from src.packet_sniffer import PacketSniffer
 import os
 import time
 
@@ -19,9 +20,7 @@ class Win_Main(QtWidgets.QMainWindow, Ui_MainWindow):
         self.stop_sniffer.triggered.connect(self.StopSniff)
 
     def StartSniff(self):
-        sudopasswd = 'hzh'
-        command = '--preserve-env PYTHONPATH=$(pwd) python3 src/packet_sniffer.py >> a.txt'
-        os.system('echo %s|sudo -S %s' %(sudopasswd,command))
+        PacketSniffer.execute(display_data)
         f = open('a.txt','r',encoding='utf-8')
         text = f.read()
         self.textBrowser.setText(text)

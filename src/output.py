@@ -28,7 +28,8 @@ class OutputToScreen(OutputMethod):
         super().__init__(subject)
         self.p = None
         self.display_data = display_data
-
+        save_to_file('abc.txt', display_data)
+        
     def update(self, packet):
         self.p = packet
         self._display_output_header()

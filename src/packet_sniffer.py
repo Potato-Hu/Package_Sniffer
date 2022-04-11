@@ -8,7 +8,7 @@ import time
 import numpy as np
 
 
-Count = np.linspace(1, 10, 10)
+Count = np.linspace(1, 20, 20)
 class Decoder:
     def __init__(self, interface: str):
         """Decodes packets incoming from a given interface.
@@ -45,8 +45,7 @@ class PacketSniffer:
         """Monitor a network interface for incoming data, decode it and
         send to pre-defined output methods.
 
-        :param interface: Interface from which packets will be captured
-            and decoded.
+        :param interface: Interface from which packets will be captured and decoded.
         """
         self._observers = list()
         self._decoder = Decoder(interface)
@@ -69,22 +68,4 @@ class PacketSniffer:
         except KeyboardInterrupt:   
             raise SystemExit("Stop Packet Sniffer...")
 
-if __name__ == "__main__":
-    import argparse
 
-    parser = argparse.ArgumentParser(description="Network packet sniffer")
-    parser.add_argument(
-        "-i", "--interface",
-        type=str,
-        default=None,
-        help="Interface from which packets will be captured (monitors all "
-             "available interfaces by default)."
-    )
-    parser.add_argument(
-        "-d", "--display-data",
-        action="store_true",
-        help="Output packet data during capture."
-    )
-    _args = parser.parse_args()
-
-    PacketSniffer(_args.interface).execute(_args.display_data)
